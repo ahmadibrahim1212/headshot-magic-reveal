@@ -36,6 +36,20 @@ const Index = () => {
     setShowUpsell(true);
   };
 
+  const scrollToLinkedInMakeover = () => {
+    const element = document.getElementById('linkedin-makeover');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToUpgrade = () => {
+    const element = document.getElementById('linkedin-makeover');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (currentStep === 'form') {
     return <UploadForm onSubmit={handleFormSubmit} onBack={() => setCurrentStep('landing')} />;
   }
@@ -158,9 +172,12 @@ const Index = () => {
             </div>
           </div>
           <div className="text-center">
-            <p className="text-lg text-blue-600 font-medium">
+            <button
+              onClick={scrollToLinkedInMakeover}
+              className="text-lg text-blue-600 font-medium hover:text-blue-700 transition-colors underline decoration-2 underline-offset-4 hover:underline-offset-8 transition-all duration-200"
+            >
               👉 Want to upgrade your entire profile too? Scroll down.
-            </p>
+            </button>
           </div>
         </div>
       </section>
@@ -174,19 +191,19 @@ const Index = () => {
               {
                 name: "Sarah J.",
                 title: "Marketing Manager",
-                text: "I finally felt proud of my profile. Got 3 recruiter DMs within a week.",
+                text: "I finally felt proud of my profile. Got 3 recruiter DMs within a week — worth way more than $49.",
                 rating: 5
               },
               {
                 name: "Michael G.",
                 title: "Software Engineer", 
-                text: "This made me look sharp, polished, and confident. For free. Unreal.",
+                text: "The headshot was great, but the full LinkedIn upgrade is what helped me land two interviews. It felt like a personal rebrand.",
                 rating: 5
               },
               {
                 name: "Emily R.",
-                title: "HR Manager at Fortune 500",
-                text: "These headshots stand out immediately.",
+                title: "HR Manager",
+                text: "These profiles stand out immediately — better than most of what I see in applicant tracking systems.",
                 rating: 5
               }
             ].map((testimonial, index) => (
@@ -217,18 +234,18 @@ const Index = () => {
             {[
               {
                 step: "1",
-                title: "Upload Your Photo",
-                description: "Share your current LinkedIn photo and basic professional details"
+                title: "Tell Us About Your Goals",
+                description: "Share your current LinkedIn link and a few quick details — whether you're job hunting, aiming for a promotion, or building your brand."
               },
               {
                 step: "2", 
-                title: "Professional Enhancement",
-                description: "Our advanced system analyzes and enhances your photo for maximum professional impact"
+                title: "We Rewrite Your Profile",
+                description: "Our team crafts a compelling new headline, About section, banner image, and skill recommendations tailored to your career direction."
               },
               {
                 step: "3",
-                title: "Download & Use",
-                description: "Get your professional headshot instantly via email and update your LinkedIn"
+                title: "You Copy + Paste and Shine",
+                description: "You'll receive a fully optimized profile in your inbox — ready to paste into LinkedIn and start standing out immediately."
               }
             ].map((item, index) => (
               <div key={index} className="text-center">
@@ -243,8 +260,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* New LinkedIn Makeover Section */}
-      <section className="py-16 px-6 bg-gradient-to-r from-gray-50 to-blue-50">
+      {/* LinkedIn Makeover Section */}
+      <section id="linkedin-makeover" className="py-16 px-6 bg-gradient-to-r from-gray-50 to-blue-50">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-bold mb-6">Want the Full LinkedIn Makeover?</h2>
           
@@ -296,7 +313,7 @@ const Index = () => {
               Get My Free Headshot
             </Button>
             <Button 
-              onClick={handleShowUpsell}
+              onClick={scrollToUpgrade}
               size="lg" 
               className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
@@ -309,8 +326,18 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Sticky Mobile Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-lg">
+        <Button 
+          onClick={scrollToUpgrade}
+          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 rounded-full shadow-lg"
+        >
+          Upgrade My LinkedIn for $49
+        </Button>
+      </div>
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-6">
+      <footer className="bg-gray-900 text-white py-12 px-6 pb-20 md:pb-12">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Camera className="h-6 w-6" />
