@@ -25,9 +25,9 @@ const Index = () => {
     setUserPhoto(photoUrl);
     setCurrentStep('processing');
     
-    // Simulate AI processing
+    // Simulate processing
     setTimeout(() => {
-      setGeneratedPhoto('/placeholder.svg'); // In real app, this would be the AI-generated image
+      setGeneratedPhoto('/placeholder.svg'); // In real app, this would be the generated image
       setCurrentStep('results');
     }, 5000);
   };
@@ -86,35 +86,30 @@ const Index = () => {
       <section className="py-20 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <Badge className="mb-6 bg-blue-100 text-blue-700 hover:bg-blue-100">
-            🎉 Free AI Headshot Generator
+            🎉 Free Professional Headshots
           </Badge>
           
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Transform Your LinkedIn Photo with
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block">
-              Professional AI Magic
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Look Instantly More Professional on LinkedIn
             </span>
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Upload your current LinkedIn photo and get a stunning, AI-enhanced professional headshot 
-            in seconds. Join 50,000+ professionals who've boosted their career prospects.
+            Get a polished, studio-quality headshot that elevates your online presence — trusted by 50,000+ professionals.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
             <Button 
               onClick={handleStartUpload}
               size="lg" 
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <Upload className="mr-2 h-5 w-5" />
-              Upload My Photo - It's FREE!
+              Upload My Photo – It's FREE!
             </Button>
-            <div className="flex items-center text-gray-500 text-sm">
-              <CheckCircle className="h-4 w-4 mr-1" />
-              No credit card required
-            </div>
           </div>
+          <p className="text-gray-500 text-sm mb-12">No credit card required. Ready in 30 seconds.</p>
 
           {/* Trust Indicators */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -138,9 +133,9 @@ const Index = () => {
       <section className="py-16 px-6 bg-white">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold text-center mb-12">See the Transformation</h2>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-4 text-gray-500">Before: Regular Photo</h3>
+              <h3 className="text-xl font-semibold mb-4 text-gray-500">Before – Your Current Photo</h3>
               <div className="relative">
                 <img 
                   src="/placeholder.svg" 
@@ -151,16 +146,21 @@ const Index = () => {
               </div>
             </div>
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">After: AI Enhanced</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">After – Professionally Enhanced</h3>
               <div className="relative">
                 <img 
                   src="/placeholder.svg" 
                   alt="After transformation" 
                   className="rounded-lg shadow-lg w-full max-w-sm mx-auto ring-4 ring-blue-200"
                 />
-                <Badge className="absolute top-4 left-4 bg-blue-100 text-blue-700">AI Enhanced</Badge>
+                <Badge className="absolute top-4 left-4 bg-blue-100 text-blue-700">Enhanced</Badge>
               </div>
             </div>
+          </div>
+          <div className="text-center">
+            <p className="text-lg text-blue-600 font-medium">
+              👉 Want to upgrade your entire profile too? Scroll down.
+            </p>
           </div>
         </div>
       </section>
@@ -172,24 +172,21 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                name: "Sarah Johnson",
-                title: "Marketing Director",
-                company: "TechCorp",
-                text: "My LinkedIn views increased 300% after using this AI headshot. The quality is incredible!",
+                name: "Sarah J.",
+                title: "Marketing Manager",
+                text: "I finally felt proud of my profile. Got 3 recruiter DMs within a week.",
                 rating: 5
               },
               {
-                name: "Michael Chen",
+                name: "Michael G.",
                 title: "Software Engineer", 
-                company: "Google",
-                text: "Professional photographers charge $500+. This gave me better results for free. Amazing!",
+                text: "This made me look sharp, polished, and confident. For free. Unreal.",
                 rating: 5
               },
               {
-                name: "Emily Rodriguez",
-                title: "HR Manager",
-                company: "Fortune 500",
-                text: "As someone who reviews LinkedIn profiles daily, these AI headshots definitely stand out.",
+                name: "Emily R.",
+                title: "HR Manager at Fortune 500",
+                text: "These headshots stand out immediately.",
                 rating: 5
               }
             ].map((testimonial, index) => (
@@ -203,7 +200,7 @@ const Index = () => {
                   <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
                   <div>
                     <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-gray-600">{testimonial.title} at {testimonial.company}</p>
+                    <p className="text-sm text-gray-600">{testimonial.title}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -225,8 +222,8 @@ const Index = () => {
               },
               {
                 step: "2", 
-                title: "AI Enhancement",
-                description: "Our advanced AI analyzes and enhances your photo for maximum professional impact"
+                title: "Professional Enhancement",
+                description: "Our advanced system analyzes and enhances your photo for maximum professional impact"
               },
               {
                 step: "3",
@@ -246,22 +243,69 @@ const Index = () => {
         </div>
       </section>
 
+      {/* New LinkedIn Makeover Section */}
+      <section className="py-16 px-6 bg-gradient-to-r from-gray-50 to-blue-50">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl font-bold mb-6">Want the Full LinkedIn Makeover?</h2>
+          
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <p className="text-xl text-gray-700 mb-6">For $49, you get:</p>
+            <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                <span>A rewritten Headline that makes you stand out</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                <span>A fresh, compelling About Section</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                <span>A premium Banner Image</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                <span>3 Recommended Skills based on your field</span>
+              </div>
+            </div>
+            <p className="text-gray-600 mb-6">No guesswork. No fluff. Just a profile you'll be proud of.</p>
+            <Button 
+              onClick={handleShowUpsell}
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Yes — Upgrade My Profile for $49
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Professional Image?</h2>
+          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your LinkedIn — Fast?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of professionals who've already enhanced their LinkedIn presence
+            We'll give you a professional headshot for free — and if you want your entire profile to stand out, we'll upgrade that too.
           </p>
-          <Button 
-            onClick={handleStartUpload}
-            size="lg" 
-            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-          >
-            <Upload className="mr-2 h-5 w-5" />
-            Get My FREE AI Headshot Now
-          </Button>
-          <p className="mt-4 text-sm opacity-75">No spam, no credit card required</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+            <Button 
+              onClick={handleStartUpload}
+              size="lg" 
+              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Upload className="mr-2 h-5 w-5" />
+              Get My Free Headshot
+            </Button>
+            <Button 
+              onClick={handleShowUpsell}
+              size="lg" 
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              Upgrade My LinkedIn for $49
+            </Button>
+          </div>
+          <p className="text-sm opacity-75">
+            Join 50,000+ professionals who now stand out online. This is the easiest way to instantly boost your credibility.
+          </p>
         </div>
       </section>
 
@@ -272,7 +316,7 @@ const Index = () => {
             <Camera className="h-6 w-6" />
             <span className="text-xl font-bold">HeadshotAI Pro</span>
           </div>
-          <p className="text-gray-400 mb-4">Professional AI headshots for career success</p>
+          <p className="text-gray-400 mb-4">Professional headshots for career success</p>
           <div className="flex justify-center items-center space-x-4 text-sm text-gray-400">
             <span>Privacy Policy</span>
             <span>•</span>
