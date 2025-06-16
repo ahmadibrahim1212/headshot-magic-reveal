@@ -226,8 +226,66 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* Why Optimize Your LinkedIn? */}
       <section className="py-16 px-6 bg-white">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-4xl font-bold text-center mb-6">Why Optimize Your LinkedIn?</h2>
+          <p className="text-xl text-center text-gray-700 mb-12 font-medium">
+            Your profile isn't just a résumé. It's your personal sales page.
+          </p>
+          
+          <div className="space-y-8 mb-12">
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-2">Recruiters search LinkedIn 1 billion times a year</h3>
+                <p className="text-gray-600">If your profile isn't optimized, you don't exist. The top 10% of profiles get 6–8× more views.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-2">Profiles with professional headlines get 3× more clicks</h3>
+                <p className="text-gray-600">First impressions matter. "Software Engineer @ Meta" is forgettable. We rewrite headlines that spark curiosity and authority.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-2">DM response rates jump 58% with a strong About section</h3>
+                <p className="text-gray-600">People reply when they understand what you do — and why it matters.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-2">Story sells. Fluff fails.</h3>
+                <p className="text-gray-600">Most LinkedIn summaries sound like job descriptions. We turn yours into a short, sharp narrative that gets remembered.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-2">You only get 7 seconds</h3>
+                <p className="text-gray-600">That's how long the average recruiter scans your profile. We help you win in that window.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <blockquote className="text-xl italic text-gray-700 font-medium">
+              "In a world of noise, clarity wins." — Craig Clemens
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 px-6 bg-gradient-to-r from-gray-50 to-blue-50">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -261,11 +319,11 @@ const Index = () => {
       </section>
 
       {/* LinkedIn Makeover Section */}
-      <section id="linkedin-makeover" className="py-16 px-6 bg-gradient-to-r from-gray-50 to-blue-50">
+      <section id="linkedin-makeover" className="py-16 px-6 bg-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-bold mb-6">Want the Full LinkedIn Makeover?</h2>
           
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl shadow-lg p-8 mb-8">
             <p className="text-xl text-gray-700 mb-6">For $49, you get:</p>
             <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
               <div className="flex items-center space-x-3">
