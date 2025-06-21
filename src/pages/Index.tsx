@@ -324,7 +324,7 @@ const Index = () => {
           <h2 className="text-4xl font-bold mb-6">Want the Full LinkedIn Makeover?</h2>
           
           <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl shadow-lg p-8 mb-8">
-            <p className="text-xl text-gray-700 mb-6">For $49, you get:</p>
+            <p className="text-xl text-gray-700 mb-6">$49 until midnight — $99 tomorrow</p>
             <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
               <div className="flex items-center space-x-3">
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
