@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Upload, Sparkles, Trophy } from "lucide-react";
+import { Link, Target, Sparkles, ClipboardCopy } from "lucide-react";
 
 const HowItWorksSection = () => {
   return (
@@ -11,16 +11,16 @@ const HowItWorksSection = () => {
         <div className="grid md:grid-cols-3 gap-12">
           <div className="text-center group">
             <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl font-bold mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-              <Upload className="h-10 w-10" />
+              <Link className="h-10 w-10" />
             </div>
             <div className="flex items-center justify-center mb-6">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mr-4">
                 1
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">Upload Your<br />LinkedIn Photo</h3>
+              <h3 className="text-2xl font-bold text-gray-900">Send Us Your LinkedIn<br />& Career Goal</h3>
             </div>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Simply upload your current headshot and we'll analyze it for professional enhancement opportunities.
+              Drop your LinkedIn URL and tell us your dream role or career goal — we tailor your profile to it.
             </p>
           </div>
           
@@ -32,25 +32,25 @@ const HowItWorksSection = () => {
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mr-4">
                 2
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">We Enhance Your<br />Headshot & Analyze</h3>
+              <h3 className="text-2xl font-bold text-gray-900">We Rewrite Your Profile<br />to Convert</h3>
             </div>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Our AI enhances your photo and analyzes your profile for optimization opportunities.
+              Our expert team (with AI help) rewrites your Headline, About section, and suggests Skills that attract recruiters.
             </p>
           </div>
           
           <div className="text-center group">
             <div className="w-20 h-20 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl font-bold mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-              <Trophy className="h-10 w-10" />
+              <ClipboardCopy className="h-10 w-10" />
             </div>
             <div className="flex items-center justify-center mb-6">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mr-4">
                 3
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">Upgrade Your Profile<br />with Expert Rewrites</h3>
+              <h3 className="text-2xl font-bold text-gray-900">You Copy + Paste<br />— And Shine</h3>
             </div>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Get professional headline, About section, and experience rewrites that convert.
+              We deliver the polished result in 24–48 hrs. Just paste it into LinkedIn and start standing out.
             </p>
           </div>
         </div>

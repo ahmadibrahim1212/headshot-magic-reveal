@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, ChevronDown, TrendingUp } from "lucide-react";
 
@@ -9,6 +10,30 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onStartUpload }: HeroSectionProps) => {
+  const [linkedinUrl, setLinkedinUrl] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const handleGetScorecard = () => {
+    if (!linkedinUrl.trim()) {
+      setShowError(true);
+      return;
+    }
+    
+    // Basic LinkedIn URL validation
+    if (!linkedinUrl.includes('linkedin.com/in/')) {
+      setShowError(true);
+      return;
+    }
+
+    setShowError(false);
+    onStartUpload();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLinkedinUrl(e.target.value);
+    if (showError) setShowError(false);
+  };
+
   return (
     <section className="py-20 px-6 bg-white">
       <div className="container mx-auto text-center max-w-5xl">
@@ -21,13 +46,28 @@ const HeroSection = ({ onStartUpload }: HeroSectionProps) => {
           Get a free scorecard that rates your headline, photo, and profile strength — and see how you stack up.
         </p>
 
+        <div className="max-w-md mx-auto mb-6">
+          <Input
+            type="text"
+            placeholder="Paste your LinkedIn URL here..."
+            value={linkedinUrl}
+            onChange={handleInputChange}
+            className="w-full h-14 text-lg px-6 rounded-xl border-2 border-gray-200 focus:border-blue-600 shadow-sm"
+          />
+          {showError && (
+            <p className="text-red-500 text-sm mt-2 text-left">
+              Please enter a valid LinkedIn URL to continue.
+            </p>
+          )}
+        </div>
+
         <Button 
-          onClick={onStartUpload}
+          onClick={handleGetScorecard}
           size="lg" 
           className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-xl font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-16 w-full max-w-md"
         >
           <BarChart3 className="mr-3 h-6 w-6" />
-          Get Your Free Scorecard — Upload LinkedIn URL
+          Get My Free LinkedIn Scorecard
         </Button>
 
         <p className="text-sm text-gray-500 mb-16">No credit card required</p>
