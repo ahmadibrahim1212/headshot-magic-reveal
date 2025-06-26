@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Upload, Shield, CheckCircle } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowLeft, Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface UploadFormProps {
@@ -15,14 +16,12 @@ interface UploadFormProps {
 
 const UploadForm = ({ onSubmit, onBack }: UploadFormProps) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    linkedinUrl: '',
+    careerGoal: '',
     jobTitle: '',
     industry: '',
-    linkedinUrl: ''
+    email: ''
   });
-  const [photo, setPhoto] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -31,40 +30,21 @@ const UploadForm = ({ onSubmit, onBack }: UploadFormProps) => {
     "Consulting", "Legal", "Real Estate", "Manufacturing", "Retail", "Other"
   ];
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        toast({
-          title: "File too large",
-          description: "Please select a file smaller than 10MB",
-          variant: "destructive"
-        });
-        return;
-      }
-      
-      setPhoto(file);
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPhotoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const careerGoalOptions = [
+    "Get more recruiter messages",
+    "Land a promotion at my current company",
+    "Switch to a new industry",
+    "Find a remote job",
+    "Increase my salary by 20%+",
+    "Build my personal brand",
+    "Network with industry leaders",
+    "Other (please specify below)"
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!photo) {
-      toast({
-        title: "Photo required",
-        description: "Please upload your LinkedIn photo",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (!formData.name || !formData.email || !formData.jobTitle) {
+    if (!formData.linkedinUrl || !formData.careerGoal || !formData.email) {
       toast({
         title: "Missing information",
         description: "Please fill in all required fields",
@@ -73,11 +53,21 @@ const UploadForm = ({ onSubmit, onBack }: UploadFormProps) => {
       return;
     }
 
+    // Basic LinkedIn URL validation
+    if (!formData.linkedinUrl.includes('linkedin.com/in/')) {
+      toast({
+        title: "Invalid LinkedIn URL",
+        description: "Please enter a valid LinkedIn profile URL",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate upload delay
+    // Simulate processing delay
     setTimeout(() => {
-      onSubmit(formData, photoPreview!);
+      onSubmit(formData, '');
     }, 1000);
   };
 
@@ -96,129 +86,110 @@ const UploadForm = ({ onSubmit, onBack }: UploadFormProps) => {
         <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader className="text-center pb-8">
             <CardTitle className="text-3xl font-bold mb-2">
-              Let's Create Your Perfect Headshot
+              Let's Fix Your LinkedIn Profile in 48 Hours
             </CardTitle>
             <p className="text-gray-600">
-              Fill in your details and upload your current photo to get started
+              Drop your details so we can upgrade your LinkedIn to attract better jobs — fast.
             </p>
             <div className="flex justify-center items-center space-x-4 mt-4 text-sm text-green-600">
               <div className="flex items-center space-x-1">
                 <Shield className="h-4 w-4" />
-                <span>Secure Upload</span>
+                <span>Secure & Private</span>
               </div>
               <div className="flex items-center space-x-1">
                 <CheckCircle className="h-4 w-4" />
-                <span>100% Free</span>
+                <span>48-Hour Delivery</span>
               </div>
             </div>
           </CardHeader>
 
           <CardContent className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Photo Upload */}
+              {/* LinkedIn URL - Required */}
               <div className="space-y-2">
-                <Label htmlFor="photo" className="text-base font-semibold">
-                  Upload Your Current LinkedIn Photo *
+                <Label htmlFor="linkedinUrl" className="text-base font-semibold text-blue-600">
+                  🟦 LinkedIn URL *
                 </Label>
-                <div className="border-2 border-dashed border-blue-200 rounded-lg p-8 text-center hover:border-blue-300 transition-colors">
-                  {photoPreview ? (
-                    <div className="space-y-4">
-                      <img 
-                        src={photoPreview} 
-                        alt="Preview" 
-                        className="w-32 h-32 object-cover rounded-full mx-auto border-4 border-blue-200"
-                      />
-                      <p className="text-sm text-gray-600">Looking good! Ready to enhance this photo?</p>
-                      <Button 
-                        type="button" 
-                        variant="outline" 
-                        onClick={() => document.getElementById('photo')?.click()}
-                      >
-                        Change Photo
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      <Upload className="h-12 w-12 text-blue-400 mx-auto" />
-                      <div>
-                        <p className="text-lg font-medium text-gray-700">Click to upload your photo</p>
-                        <p className="text-sm text-gray-500">JPG, PNG up to 10MB</p>
-                      </div>
-                      <Button type="button" variant="outline">
-                        Choose File
-                      </Button>
-                    </div>
-                  )}
-                  <input
-                    id="photo"
-                    type="file"
-                    accept="image/*"
-                    onChange={handlePhotoChange}
-                    className="hidden"
-                  />
-                </div>
-              </div>
-
-              {/* Personal Information */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    placeholder="John Smith"
-                    className="h-12"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    placeholder="john@company.com"
-                    className="h-12"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="jobTitle">Job Title *</Label>
-                  <Input
-                    id="jobTitle"
-                    value={formData.jobTitle}
-                    onChange={(e) => setFormData({...formData, jobTitle: e.target.value})}
-                    placeholder="Marketing Manager"
-                    className="h-12"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <Select onValueChange={(value) => setFormData({...formData, industry: value})}>
-                    <SelectTrigger className="h-12">
-                      <SelectValue placeholder="Select your industry" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {industries.map((industry) => (
-                        <SelectItem key={industry} value={industry}>
-                          {industry}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="linkedin">LinkedIn Profile URL (Optional)</Label>
                 <Input
-                  id="linkedin"
+                  id="linkedinUrl"
                   value={formData.linkedinUrl}
                   onChange={(e) => setFormData({...formData, linkedinUrl: e.target.value})}
-                  placeholder="https://linkedin.com/in/yourprofile"
+                  placeholder="https://linkedin.com/in/your-profile"
+                  className="h-12"
+                />
+              </div>
+
+              {/* Career Goal - Required */}
+              <div className="space-y-2">
+                <Label htmlFor="careerGoal" className="text-base font-semibold text-purple-600">
+                  🟪 Career Goal *
+                </Label>
+                <Select onValueChange={(value) => setFormData({...formData, careerGoal: value})}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="What's your main career goal?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {careerGoalOptions.map((goal) => (
+                      <SelectItem key={goal} value={goal}>
+                        {goal}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {formData.careerGoal === "Other (please specify below)" && (
+                  <Textarea
+                    placeholder="Tell us about your specific career goal..."
+                    value={formData.careerGoal}
+                    onChange={(e) => setFormData({...formData, careerGoal: e.target.value})}
+                    className="mt-2"
+                  />
+                )}
+              </div>
+
+              {/* Current Job Title - Optional */}
+              <div className="space-y-2">
+                <Label htmlFor="jobTitle" className="text-base font-semibold text-yellow-600">
+                  🟨 Current Job Title (Optional)
+                </Label>
+                <Input
+                  id="jobTitle"
+                  value={formData.jobTitle}
+                  onChange={(e) => setFormData({...formData, jobTitle: e.target.value})}
+                  placeholder="Marketing Manager, Software Engineer, etc."
+                  className="h-12"
+                />
+              </div>
+
+              {/* Industry */}
+              <div className="space-y-2">
+                <Label htmlFor="industry" className="text-base font-semibold text-green-600">
+                  🟩 Industry
+                </Label>
+                <Select onValueChange={(value) => setFormData({...formData, industry: value})}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Select your industry" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {industries.map((industry) => (
+                      <SelectItem key={industry} value={industry}>
+                        {industry}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Email - Required */}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-base font-semibold text-orange-600">
+                  🟧 Email *
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  placeholder="your.email@company.com"
                   className="h-12"
                 />
               </div>
@@ -229,17 +200,17 @@ const UploadForm = ({ onSubmit, onBack }: UploadFormProps) => {
                 className="w-full h-14 text-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 {isSubmitting ? (
-                  "Processing Your Photo..."
+                  "Processing Your Request..."
                 ) : (
                   <>
-                    <Upload className="mr-2 h-5 w-5" />
-                    Generate My AI Headshot
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    → Get My LinkedIn Fix
                   </>
                 )}
               </Button>
 
               <p className="text-xs text-gray-500 text-center">
-                By submitting, you agree to receive your AI-generated headshot via email. 
+                By submitting, you agree to receive your LinkedIn profile analysis via email. 
                 We respect your privacy and won't spam you.
               </p>
             </form>
