@@ -73,7 +73,7 @@ const TestimonialsSection = () => {
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
-        </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );
