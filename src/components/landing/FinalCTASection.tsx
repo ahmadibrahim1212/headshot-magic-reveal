@@ -10,7 +10,7 @@ const FinalCTASection = ({ onShowUpsell }: FinalCTASectionProps) => {
   return (
     <section className="py-16 px-6 bg-gray-900 text-white">
       <div className="container mx-auto max-w-4xl text-center">
-        <p className="text-lg mb-2">We process 500 headshots/day.</p>
+        <p className="text-lg mb-2">We process 500 LinkedIn rewrites/day.</p>
         <p className="text-3xl font-bold text-yellow-400 mb-4">8 profile spots left today</p>
         
         <div className="bg-yellow-400 text-black px-6 py-3 rounded-lg text-2xl font-bold mb-6 inline-block">
@@ -33,7 +33,7 @@ const FinalCTASection = ({ onShowUpsell }: FinalCTASectionProps) => {
             variant="outline"
             className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg rounded-full"
           >
-            No thanks—just my headshot
+            No thanks—just my scorecard
           </Button>
         </div>
       </div>

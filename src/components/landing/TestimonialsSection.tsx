@@ -8,19 +8,19 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       quote: "I finally felt proud of my profile. Got 3 recruiter DMs within a week — worth way more than $49.",
-      name: "Sarah J.",
+      name: "Nadine A.",
       role: "Marketing Manager",
       rating: 4
     },
     {
       quote: "The headshot was great, but the full LinkedIn upgrade is what helped me land two interviews. It felt like a personal rebrand.",
-      name: "Michael G.",
+      name: "Karim H.",
       role: "Software Engineer",
       rating: 5
     },
     {
       quote: "These profiles stand out immediately — better than most of what I see in applicant tracking systems.",
-      name: "Emily R.",
+      name: "Maya S.",
       role: "Software Engineer",
       rating: 5
     },
@@ -73,7 +73,7 @@ const TestimonialsSection = () => {
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
-        </Carousel>
+        </CarouselContent>
       </div>
     </section>
   );

@@ -22,7 +22,7 @@ const LinkedInMakeoverSection = ({ onShowUpsell }: LinkedInMakeoverSectionProps)
           <div className="flex items-center justify-center mb-8">
             <Badge className="bg-red-100 text-red-800 px-6 py-3 text-lg font-semibold">
               <Clock className="h-5 w-5 mr-2" />
-              Only 12 free headshots left today
+              Only 12 LinkedIn rewrites left today
             </Badge>
           </div>
           
@@ -33,10 +33,10 @@ const LinkedInMakeoverSection = ({ onShowUpsell }: LinkedInMakeoverSectionProps)
           </div>
           
           {/* What's Included */}
-          <div className="grid md:grid-cols-3 gap-6 text-left max-w-3xl mx-auto mb-12">
+          <div className="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto mb-12">
             <div className="flex items-center space-x-3">
               <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-              <span className="text-lg font-medium">New headline</span>
+              <span className="text-lg font-medium">New headline that pops</span>
             </div>
             <div className="flex items-center space-x-3">
               <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
@@ -44,7 +44,19 @@ const LinkedInMakeoverSection = ({ onShowUpsell }: LinkedInMakeoverSectionProps)
             </div>
             <div className="flex items-center space-x-3">
               <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-              <span className="text-lg font-medium">Experience rewrite</span>
+              <span className="text-lg font-medium">Experience rewrite (role-by-role)</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+              <span className="text-lg font-medium">Keyword-optimized for recruiters</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+              <span className="text-lg font-medium">Skill section suggestions</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+              <span className="text-lg font-medium">Personalized based on career goals</span>
             </div>
           </div>
           
@@ -67,7 +79,7 @@ const LinkedInMakeoverSection = ({ onShowUpsell }: LinkedInMakeoverSectionProps)
                 "The upgrade was worth every penny. I feel more confident applying for jobs now!"
               </p>
               <div>
-                <p className="font-bold text-lg">Sarah J.</p>
+                <p className="font-bold text-lg">Nadine A.</p>
                 <p className="text-gray-600">Marketing Manager</p>
               </div>
             </CardContent>
