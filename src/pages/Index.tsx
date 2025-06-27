@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import UploadForm from "@/components/UploadForm";
 import ProgressTracker from "@/components/ProgressTracker";
@@ -5,7 +6,6 @@ import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import UpsellModal from "@/components/UpsellModal";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
-import TransformationSection from "@/components/landing/TransformationSection";
 import LinkedInBenefitsSection from "@/components/landing/LinkedInBenefitsSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
@@ -40,11 +40,6 @@ const Index = () => {
     setShowUpsell(true);
   };
 
-  const handleScrollToUpsell = () => {
-    const element = document.getElementById('linkedin-makeover');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   if (currentStep === 'form') {
     return <LinkedInForm onSubmit={(data) => handleFormSubmit(data, '')} onBack={() => setCurrentStep('landing')} />;
   }
@@ -75,7 +70,6 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Header />
       <HeroSection onStartUpload={handleStartUpload} />
-      <TransformationSection onScrollToUpsell={handleScrollToUpsell} />
       <LinkedInBenefitsSection />
       <HowItWorksSection />
       <TestimonialsSection />
