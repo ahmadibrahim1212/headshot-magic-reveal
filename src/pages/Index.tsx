@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import UploadForm from "@/components/UploadForm";
 import ProgressTracker from "@/components/ProgressTracker";
@@ -13,6 +12,7 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import LinkedInMakeoverSection from "@/components/landing/LinkedInMakeoverSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import Footer from "@/components/landing/Footer";
+import LinkedInForm from "@/components/LinkedInForm";
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState<'landing' | 'form' | 'processing' | 'results'>('landing');
@@ -46,7 +46,7 @@ const Index = () => {
   };
 
   if (currentStep === 'form') {
-    return <UploadForm onSubmit={handleFormSubmit} onBack={() => setCurrentStep('landing')} />;
+    return <LinkedInForm onSubmit={(data) => handleFormSubmit(data, '')} onBack={() => setCurrentStep('landing')} />;
   }
 
   if (currentStep === 'processing') {
