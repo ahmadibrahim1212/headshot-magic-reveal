@@ -7,36 +7,39 @@ const LinkedInBenefitsSection = () => {
     <section className="py-20 px-6 bg-white">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900">
-          Your Profile Isn't Just a Résumé.<br />
-          It's a Sales Page.
+          Make Your LinkedIn Clear,<br />
+          Confident, and Compelling
         </h2>
-        <p className="text-center text-xl text-gray-600 mb-16 font-medium">
-          Recruiters don't scroll. They scan. You have 7 seconds to win their trust.
+        <p className="text-center text-xl text-gray-600 mb-4 font-medium">
+          You have 7 seconds to make it count.
+        </p>
+        <p className="text-center text-lg text-gray-600 mb-16">
+          Recruiters don't scroll — they skim. You've got a narrow window to prove you're worth a closer look.
         </p>
         
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div className="space-y-8">
             <div className="flex items-start space-x-4">
               <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">1 Billion Searches Per Year</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">Top 10% get 6–8× more views</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Appear in More Recruiter Searches</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Profiles with the right keywords show up in 6× more recruiter searches. We optimize yours to appear in global and regional (Gulf, EU, U.S.) opportunities.</p>
               </div>
             </div>
             
             <div className="flex items-start space-x-4">
               <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">3× More Clicks</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">Strong headlines win attention</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Get Noticed — Fast</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Optimized headlines can generate 3× more clicks from recruiters and hiring managers. We write yours to stop the scroll.</p>
               </div>
             </div>
             
             <div className="flex items-start space-x-4">
               <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">58% Higher DM Replies</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">Clear About section = more outreach success</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Turn Views into Real Conversations</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Profiles with clear summaries and strong formatting receive 58% more recruiter messages. A polished profile helps turn views into real interview invites.</p>
               </div>
             </div>
           </div>
@@ -45,27 +48,27 @@ const LinkedInBenefitsSection = () => {
             <div className="flex items-start space-x-4">
               <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Story Sells. Fluff Fails.</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">Most summaries are dull. We rewrite to be sharp + memorable.</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Stand Out From the Crowd</h3>
+                <p className="text-gray-600 text-base leading-relaxed">There are over 1 billion LinkedIn profiles — and most sound the same. We make sure yours actually gets read.</p>
               </div>
             </div>
             
             <div className="flex items-start space-x-4">
               <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Only 7 Seconds</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">That's all the time you have. We help you win that window.</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Tell Your Story, Your Way</h3>
+                <p className="text-gray-600 text-base leading-relaxed">We turn your experience — whether you're in Beirut, Riyadh, or Paris — into a compelling narrative that aligns with your career goals.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-4">
+              <CheckCircle className="h-8 w-8 text-green-500 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">Get Closer to Your Career Dream</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Clients have reported 2×–5× more profile views and interview invites within 7–14 days of using our service. Every rewrite is built to help you land the right opportunity — faster.</p>
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Quote Block */}
-        <div className="bg-gray-50 p-8 md:p-12 rounded-2xl text-center max-w-3xl mx-auto">
-          <blockquote className="text-2xl md:text-3xl italic text-gray-700 font-medium mb-4">
-            "In a world of noise, clarity wins."
-          </blockquote>
-          <cite className="text-lg text-gray-600 font-semibold">— Craig Clemens</cite>
         </div>
       </div>
     </section>

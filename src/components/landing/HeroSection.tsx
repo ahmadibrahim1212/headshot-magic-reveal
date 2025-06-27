@@ -38,8 +38,8 @@ const HeroSection = ({ onStartUpload }: HeroSectionProps) => {
     <section className="py-20 px-6 bg-white">
       <div className="container mx-auto text-center max-w-5xl">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 leading-tight">
-          Is Your LinkedIn Profile<br />
-          Holding You Back?
+          Stand Out. Get Noticed.<br />
+          Land More Opportunities with LinkedIn.
         </h1>
         
         <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto font-medium">
