@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Upload, X } from "lucide-react";
+import { ArrowLeft, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -20,23 +19,13 @@ const LinkedInForm = ({ onSubmit, onBack }: LinkedInFormProps) => {
     fullName: '',
     email: '',
     linkedinUrl: '',
-    jobTitle: '',
     careerGoal: '',
-    industry: '',
-    topSkills: [] as string[],
     targetRole: '',
-    notes: '',
     resumeFile: null as File | null
   });
-  const [skillInput, setSkillInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadingResume, setUploadingResume] = useState(false);
   const { toast } = useToast();
-
-  const industries = [
-    "Technology", "Finance", "Healthcare", "Marketing", "Sales", "Education", 
-    "Consulting", "Legal", "Real Estate", "Manufacturing", "Retail", "Other"
-  ];
 
   const careerGoalOptions = [
     "Get more recruiter messages",
@@ -48,23 +37,6 @@ const LinkedInForm = ({ onSubmit, onBack }: LinkedInFormProps) => {
     "Network with industry leaders",
     "Other"
   ];
-
-  const addSkill = () => {
-    if (skillInput.trim() && formData.topSkills.length < 5) {
-      setFormData(prev => ({
-        ...prev,
-        topSkills: [...prev.topSkills, skillInput.trim()]
-      }));
-      setSkillInput('');
-    }
-  };
-
-  const removeSkill = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      topSkills: prev.topSkills.filter((_, i) => i !== index)
-    }));
-  };
 
   const handleResumeUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -197,7 +169,7 @@ const LinkedInForm = ({ onSubmit, onBack }: LinkedInFormProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-8 px-6">
-      <div className="container mx-auto max-w-3xl">
+      <div className="container mx-auto max-w-2xl">
         <Button 
           variant="ghost" 
           onClick={onBack}
@@ -266,40 +238,6 @@ const LinkedInForm = ({ onSubmit, onBack }: LinkedInFormProps) => {
                 />
               </div>
 
-              {/* Career Information */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="jobTitle" className="text-base font-semibold text-yellow-600">
-                    🟨 Current Job Title (Optional)
-                  </Label>
-                  <Input
-                    id="jobTitle"
-                    value={formData.jobTitle}
-                    onChange={(e) => setFormData({...formData, jobTitle: e.target.value})}
-                    placeholder="Marketing Manager"
-                    className="h-12"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="industry" className="text-base font-semibold text-green-600">
-                    🟩 Industry
-                  </Label>
-                  <Select onValueChange={(value) => setFormData({...formData, industry: value})}>
-                    <SelectTrigger className="h-12">
-                      <SelectValue placeholder="Select your industry" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {industries.map((industry) => (
-                        <SelectItem key={industry} value={industry}>
-                          {industry}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
               {/* Career Goal */}
               <div className="space-y-2">
                 <Label htmlFor="careerGoal" className="text-base font-semibold text-purple-600">
@@ -331,60 +269,6 @@ const LinkedInForm = ({ onSubmit, onBack }: LinkedInFormProps) => {
                   placeholder="Senior Marketing Manager, Product Director, etc."
                   className="h-12"
                   required
-                />
-              </div>
-
-              {/* Top Skills */}
-              <div className="space-y-2">
-                <Label className="text-base font-semibold">
-                  🛠️ Top Skills (Optional, max 5)
-                </Label>
-                <div className="flex space-x-2">
-                  <Input
-                    value={skillInput}
-                    onChange={(e) => setSkillInput(e.target.value)}
-                    placeholder="Add a skill"
-                    className="h-12"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
-                  />
-                  <Button 
-                    type="button" 
-                    onClick={addSkill}
-                    disabled={formData.topSkills.length >= 5}
-                    className="h-12"
-                  >
-                    Add
-                  </Button>
-                </div>
-                {formData.topSkills.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {formData.topSkills.map((skill, index) => (
-                      <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                        {skill}
-                        <button
-                          type="button"
-                          onClick={() => removeSkill(index)}
-                          className="ml-2 text-blue-600 hover:text-blue-800"
-                        >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Notes */}
-              <div className="space-y-2">
-                <Label htmlFor="notes" className="text-base font-semibold">
-                  📝 Additional Notes or Context (Optional)
-                </Label>
-                <Textarea
-                  id="notes"
-                  value={formData.notes}
-                  onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                  placeholder="Any specific achievements, goals, or context you'd like us to know..."
-                  className="min-h-[100px]"
                 />
               </div>
 
