@@ -1,228 +1,171 @@
+
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, AlertCircle, XCircle, TrendingUp } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { TrendingUp, User, FileText, Briefcase, Award, Camera } from "lucide-react";
 
-interface ScoreBreakdown {
-  headline: number;
-  about: number;
-  experience: number;
-  skills: number;
-  photo: number;
-}
-
-interface ScorecardProps {
+interface LinkedInScorecardProps {
   linkedinUrl: string;
   onGetMakeover: () => void;
 }
 
-const LinkedInScorecard = ({ linkedinUrl, onGetMakeover }: ScorecardProps) => {
-  const [scores, setScores] = useState<ScoreBreakdown | null>(null);
-  const [totalScore, setTotalScore] = useState(0);
+interface ScoreSection {
+  name: string;
+  score: number;
+  maxScore: number;
+  feedback: string;
+  icon: React.ReactNode;
+}
+
+const LinkedInScorecard = ({ linkedinUrl, onGetMakeover }: LinkedInScorecardProps) => {
   const [showCTA, setShowCTA] = useState(false);
-  const [isAnalyzing, setIsAnalyzing] = useState(true);
 
-  // Mock scoring logic - in a real app, this would analyze the actual LinkedIn profile
-  const analyzeProfile = (url: string): ScoreBreakdown => {
-    // Simple rule-based scoring for demo purposes
-    const baseScores = {
-      headline: Math.floor(Math.random() * 8) + 8, // 8-16 out of 20
-      about: Math.floor(Math.random() * 10) + 6, // 6-16 out of 20
-      experience: Math.floor(Math.random() * 12) + 8, // 8-20 out of 20
-      skills: Math.floor(Math.random() * 8) + 10, // 10-18 out of 20
-      photo: Math.floor(Math.random() * 10) + 8, // 8-18 out of 20
-    };
-
-    // Ensure total is realistic (typically 40-80)
-    const total = Object.values(baseScores).reduce((sum, score) => sum + score, 0);
-    if (total > 75) {
-      // Reduce some scores to keep it realistic
-      baseScores.headline = Math.max(6, baseScores.headline - 4);
-      baseScores.about = Math.max(4, baseScores.about - 3);
-    }
-
-    return baseScores;
+  // Mock scoring logic - in reality, this would analyze the LinkedIn profile
+  const calculateScore = (url: string): ScoreSection[] => {
+    // Simple mock scoring based on URL length and common patterns
+    const hasNumbers = /\d/.test(url);
+    const hasHyphens = url.includes('-');
+    const urlLength = url.length;
+    
+    return [
+      {
+        name: "Headline",
+        score: hasNumbers ? 18 : 12,
+        maxScore: 20,
+        feedback: hasNumbers ? "Good use of specific metrics" : "Add specific role or achievements",
+        icon: <User className="h-4 w-4" />
+      },
+      {
+        name: "About Section",
+        score: urlLength > 50 ? 16 : 10,
+        maxScore: 20,
+        feedback: urlLength > 50 ? "Well-detailed profile" : "Expand your story and value proposition",
+        icon: <FileText className="h-4 w-4" />
+      },
+      {
+        name: "Experience",
+        score: hasHyphens ? 15 : 8,
+        maxScore: 20,
+        feedback: hasHyphens ? "Good job structure" : "Add more detailed work experience",
+        icon: <Briefcase className="h-4 w-4" />
+      },
+      {
+        name: "Skills",
+        score: 14,
+        maxScore: 20,
+        feedback: "Add more relevant skills and get endorsements",
+        icon: <Award className="h-4 w-4" />
+      },
+      {
+        name: "Profile Photo",
+        score: 11,
+        maxScore: 20,
+        feedback: "Use a professional headshot with better lighting",
+        icon: <Camera className="h-4 w-4" />
+      }
+    ];
   };
 
+  const sections = calculateScore(linkedinUrl);
+  const totalScore = sections.reduce((sum, section) => sum + section.score, 0);
+  const maxTotalScore = sections.reduce((sum, section) => sum + section.maxScore, 0);
+  const percentage = Math.round((totalScore / maxTotalScore) * 100);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCTA(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const getScoreColor = (score: number, maxScore: number) => {
-    const percentage = (score / maxScore) * 100;
-    if (percentage >= 80) return "text-green-600";
-    if (percentage >= 60) return "text-yellow-600";
+    const percent = (score / maxScore) * 100;
+    if (percent >= 80) return "text-green-600";
+    if (percent >= 60) return "text-yellow-600";
     return "text-red-600";
   };
 
-  const getScoreIcon = (score: number, maxScore: number) => {
-    const percentage = (score / maxScore) * 100;
-    if (percentage >= 80) return <CheckCircle className="h-5 w-5 text-green-500" />;
-    if (percentage >= 60) return <AlertCircle className="h-5 w-5 text-yellow-500" />;
-    return <XCircle className="h-5 w-5 text-red-500" />;
-  };
-
   const getScoreLabel = (score: number, maxScore: number) => {
-    const percentage = (score / maxScore) * 100;
-    if (percentage >= 80) return "Strong";
-    if (percentage >= 60) return "Fair";
+    const percent = (score / maxScore) * 100;
+    if (percent >= 80) return "Excellent";
+    if (percent >= 60) return "Good";
+    if (percent >= 40) return "Fair";
     return "Needs Work";
   };
 
-  const getFeedback = (category: string, score: number, maxScore: number) => {
-    const percentage = (score / maxScore) * 100;
-    
-    const feedbackMap: Record<string, Record<string, string>> = {
-      headline: {
-        high: "Your headline effectively showcases your value proposition.",
-        medium: "Your headline could be more compelling and keyword-rich.",
-        low: "Your headline needs to better highlight your unique value and skills."
-      },
-      about: {
-        high: "Your about section tells a compelling professional story.",
-        medium: "Your about section could be more engaging and results-focused.",
-        low: "Your about section needs more personality and specific achievements."
-      },
-      experience: {
-        high: "Your experience section demonstrates clear career progression.",
-        medium: "Your experience could highlight more specific accomplishments.",
-        low: "Your experience section needs more detail and quantified results."
-      },
-      skills: {
-        high: "You have a well-rounded skills section with relevant expertise.",
-        medium: "Consider adding more industry-specific skills and endorsements.",
-        low: "Your skills section needs expansion with relevant keywords."
-      },
-      photo: {
-        high: "You have a professional, engaging profile photo.",
-        medium: "Your photo could be more professional or higher quality.",
-        low: "Consider updating to a more professional headshot."
-      }
-    };
-
-    if (percentage >= 80) return feedbackMap[category].high;
-    if (percentage >= 60) return feedbackMap[category].medium;
-    return feedbackMap[category].low;
-  };
-
-  useEffect(() => {
-    // Simulate analysis time
-    const timer = setTimeout(() => {
-      const breakdown = analyzeProfile(linkedinUrl);
-      setScores(breakdown);
-      const total = Object.values(breakdown).reduce((sum, score) => sum + score, 0);
-      setTotalScore(total);
-      setIsAnalyzing(false);
-
-      // Show CTA after a delay
-      setTimeout(() => {
-        setShowCTA(true);
-      }, 2000);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [linkedinUrl]);
-
-  if (isAnalyzing) {
-    return (
-      <Card className="max-w-2xl mx-auto mt-8">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Analyzing Your LinkedIn Profile...</CardTitle>
-        </CardHeader>
-        <CardContent className="text-center py-8">
-          <div className="animate-pulse space-y-4">
-            <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
-            <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
-          </div>
-          <p className="text-gray-600 mt-4">This will take just a moment...</p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (!scores) return null;
-
-  const totalPercentage = (totalScore / 100) * 100;
-
   return (
-    <div className="max-w-4xl mx-auto mt-8 space-y-6">
+    <div className="max-w-2xl mx-auto mt-12 p-8 bg-white border-2 border-gray-200 rounded-2xl shadow-lg">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Your LinkedIn Scorecard</h2>
+        <p className="text-gray-600">Here's how your profile measures up</p>
+      </div>
+
       {/* Overall Score */}
-      <Card className="text-center">
-        <CardHeader>
-          <CardTitle className="text-3xl mb-4">Your LinkedIn Score</CardTitle>
-          <div className="space-y-4">
-            <div className="text-6xl font-bold text-blue-600">{totalScore}/100</div>
-            <Progress value={totalPercentage} className="h-4 max-w-md mx-auto" />
-            <div className="flex items-center justify-center space-x-2">
-              <TrendingUp className="h-5 w-5 text-blue-600" />
-              <span className="text-lg font-medium">
-                {totalPercentage >= 80 ? "Excellent" : 
-                 totalPercentage >= 60 ? "Good" : 
-                 totalPercentage >= 40 ? "Fair" : "Needs Improvement"}
-              </span>
-            </div>
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-32 h-32 bg-blue-50 rounded-full mb-4">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-blue-600">{percentage}</div>
+            <div className="text-sm text-gray-600">out of 100</div>
           </div>
-        </CardHeader>
-      </Card>
+        </div>
+        <div className="flex items-center justify-center space-x-2 mb-2">
+          <TrendingUp className="h-5 w-5 text-blue-600" />
+          <span className="text-lg font-semibold text-gray-900">
+            {percentage >= 80 ? "Strong Profile" : percentage >= 60 ? "Good Foundation" : "Needs Improvement"}
+          </span>
+        </div>
+        <p className="text-gray-600 text-sm">
+          You're in the {percentage >= 80 ? "top 20%" : percentage >= 60 ? "top 40%" : "bottom 60%"} of LinkedIn profiles
+        </p>
+      </div>
 
       {/* Score Breakdown */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Score Breakdown</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {Object.entries(scores).map(([category, score]) => {
-            const maxScore = 20;
-            const percentage = (score / maxScore) * 100;
-            const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-            
-            return (
-              <div key={category} className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    {getScoreIcon(score, maxScore)}
-                    <span className="font-semibold text-lg">{categoryName}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className={`font-bold ${getScoreColor(score, maxScore)}`}>
-                      {score}/{maxScore}
-                    </span>
-                    <Badge variant="outline" className={getScoreColor(score, maxScore)}>
-                      {getScoreLabel(score, maxScore)}
-                    </Badge>
-                  </div>
-                </div>
-                <Progress value={percentage} className="h-3" />
-                <p className="text-gray-600 text-sm">
-                  {getFeedback(category, score, maxScore)}
-                </p>
+      <div className="space-y-6 mb-8">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Score Breakdown</h3>
+        {sections.map((section, index) => (
+          <div key={index} className="bg-gray-50 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center space-x-2">
+                {section.icon}
+                <span className="font-medium text-gray-900">{section.name}</span>
               </div>
-            );
-          })}
-        </CardContent>
-      </Card>
+              <div className="flex items-center space-x-2">
+                <span className={`font-bold ${getScoreColor(section.score, section.maxScore)}`}>
+                  {section.score}/{section.maxScore}
+                </span>
+                <Badge variant="outline" className={getScoreColor(section.score, section.maxScore)}>
+                  {getScoreLabel(section.score, section.maxScore)}
+                </Badge>
+              </div>
+            </div>
+            <Progress value={(section.score / section.maxScore) * 100} className="mb-2" />
+            <p className="text-sm text-gray-600">{section.feedback}</p>
+          </div>
+        ))}
+      </div>
 
       {/* CTA Section */}
       {showCTA && (
-        <Card className="text-center bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 animate-fade-in">
-          <CardContent className="py-8">
-            <h3 className="text-2xl font-bold mb-4 text-gray-900">
-              Want us to fix this for you?
-            </h3>
-            <p className="text-lg text-gray-600 mb-6">
-              Get your full LinkedIn profile professionally rewritten and optimized for just $49
-            </p>
-            <Button 
-              onClick={onGetMakeover}
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              → Get My LinkedIn Makeover
-            </Button>
-            <p className="text-sm text-gray-500 mt-4">
-              Delivered in 48 hours • Money-back guarantee
-            </p>
-          </CardContent>
-        </Card>
+        <div className="text-center p-6 bg-blue-50 rounded-xl border border-blue-200 animate-fade-in">
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            Ready to Boost Your Score?
+          </h3>
+          <p className="text-gray-600 mb-6">
+            Get a professional LinkedIn makeover that will help you stand out to recruiters and land better opportunities.
+          </p>
+          <Button 
+            onClick={onGetMakeover}
+            size="lg" 
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            Get My LinkedIn Makeover - $49
+          </Button>
+          <p className="text-xs text-gray-500 mt-3">
+            ✓ Professional rewrite delivered in 48 hours
+          </p>
+        </div>
       )}
     </div>
   );

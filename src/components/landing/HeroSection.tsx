@@ -33,10 +33,12 @@ const HeroSection = ({ onStartUpload }: HeroSectionProps) => {
   };
 
   const handleGetMakeover = () => {
+    console.log('Opening LinkedIn form modal');
     setShowFormModal(true);
   };
 
   const handleFormSubmit = (data: any) => {
+    console.log('Form submitted with data:', data);
     setShowFormModal(false);
     onStartUpload();
   };
