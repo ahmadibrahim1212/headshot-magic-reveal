@@ -12,22 +12,15 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import LinkedInMakeoverSection from "@/components/landing/LinkedInMakeoverSection";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import Footer from "@/components/landing/Footer";
-import LinkedInForm from "@/components/LinkedInForm";
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<'landing' | 'form' | 'processing' | 'results'>('landing');
+  const [currentStep, setCurrentStep] = useState<'landing' | 'processing' | 'results'>('landing');
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const [generatedPhoto, setGeneratedPhoto] = useState<string | null>(null);
   const [showUpsell, setShowUpsell] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
   const handleStartUpload = () => {
-    setCurrentStep('form');
-  };
-
-  const handleFormSubmit = (data: any, photoUrl: string) => {
-    setUserData(data);
-    setUserPhoto(photoUrl);
     setCurrentStep('processing');
     
     setTimeout(() => {
@@ -39,10 +32,6 @@ const Index = () => {
   const handleShowUpsell = () => {
     setShowUpsell(true);
   };
-
-  if (currentStep === 'form') {
-    return <LinkedInForm onSubmit={(data) => handleFormSubmit(data, '')} onBack={() => setCurrentStep('landing')} />;
-  }
 
   if (currentStep === 'processing') {
     return <ProgressTracker />;
