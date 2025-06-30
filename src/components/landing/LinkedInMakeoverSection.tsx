@@ -64,7 +64,7 @@ const LinkedInMakeoverSection = ({ onShowUpsell }: LinkedInMakeoverSectionProps)
             onClick={onShowUpsell}
             className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 text-xl font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 mb-12 w-full max-w-md"
           >
-            Get LinkedIn Makeover - $49
+            Fix My LinkedIn for $49
           </Button>
           
           {/* Testimonial */}
