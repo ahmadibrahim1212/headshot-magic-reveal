@@ -4,6 +4,7 @@ import UploadForm from "@/components/UploadForm";
 import ProgressTracker from "@/components/ProgressTracker";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import UpsellModal from "@/components/UpsellModal";
+import LinkedInFormModal from "@/components/LinkedInFormModal";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import LinkedInBenefitsSection from "@/components/landing/LinkedInBenefitsSection";
@@ -18,6 +19,7 @@ const Index = () => {
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const [generatedPhoto, setGeneratedPhoto] = useState<string | null>(null);
   const [showUpsell, setShowUpsell] = useState(false);
+  const [showLinkedInForm, setShowLinkedInForm] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
   const handleStartUpload = () => {
@@ -31,6 +33,15 @@ const Index = () => {
 
   const handleShowUpsell = () => {
     setShowUpsell(true);
+  };
+
+  const handleShowLinkedInForm = () => {
+    setShowLinkedInForm(true);
+  };
+
+  const handleLinkedInFormSubmit = (data: any) => {
+    setShowLinkedInForm(false);
+    handleStartUpload();
   };
 
   if (currentStep === 'processing') {
@@ -62,7 +73,7 @@ const Index = () => {
       <LinkedInBenefitsSection />
       <HowItWorksSection />
       <TestimonialsSection />
-      <LinkedInMakeoverSection onShowUpsell={handleShowUpsell} />
+      <LinkedInMakeoverSection onShowUpsell={handleShowLinkedInForm} />
       <FinalCTASection onShowUpsell={handleShowUpsell} />
       <Footer />
       
@@ -70,6 +81,12 @@ const Index = () => {
         isOpen={showUpsell} 
         onClose={() => setShowUpsell(false)}
         userData={userData}
+      />
+      
+      <LinkedInFormModal 
+        isOpen={showLinkedInForm}
+        onClose={() => setShowLinkedInForm(false)}
+        onSubmit={handleLinkedInFormSubmit}
       />
     </div>
   );
